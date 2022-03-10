@@ -1,0 +1,11 @@
+version: 1 
+datastore: 
+  filename: characters.sqlite
+scheduler: 
+  period_sec: 5 
+eventstore: 
+  url: http://localhost:8090
+events: 
+  hostname: kafka.westus.cloudapp.azure.com
+  port: 9092 
+  topic: events

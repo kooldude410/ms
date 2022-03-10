@@ -1,0 +1,57 @@
+---
+openapi: 3.0.0
+info: 
+  description: This API provides event stats 
+  version: "1.0.0" 
+  title: Stats API 
+  contact: 
+    email: me@bcit.ca 
+ 
+paths: 
+  /events/stats: 
+    get: 
+      summary: Gets the event stats 
+      operationId: app.get_stats 
+      description: Gets xp and item processsed statistics 
+      responses: 
+        '200': 
+          description: Successfully returned a list of events 
+          content: 
+            application/json: 
+              schema: 
+                type: object 
+                items: 
+                  $ref: '#/components/schemas/ReadingStats' 
+        '400': 
+          description: Invalid request 
+          content: 
+            application/json: 
+              schema: 
+                type: object 
+                properties: 
+                  message: 
+                    type: string 
+ 
+components: 
+  schemas: 
+    ReadingStats: 
+      required: 
+      - item_total 
+      - item_max_gain
+      - xp_total
+      - xp_max_gain
+      
+      properties: 
+        item_total: 
+          type: integer 
+          example: 500 
+        item_max_gain: 
+          type: integer 
+          example: 20 
+        xp_total: 
+          type: integer 
+          example: 500 
+        xp_max_gain: 
+          type: integer 
+          example: 5000 
+      type: object

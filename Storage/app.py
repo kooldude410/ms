@@ -12,7 +12,6 @@ from pickupitem import pickupitem
 
 import yaml
 
-import cryptography
 import datetime
 import json 
 from pykafka import KafkaClient
@@ -150,7 +149,7 @@ def process_messages():
     # read all the old messages from the history in the message queue). 
     consumer = topic.get_simple_consumer(consumer_group=b'event_group', 
                                          reset_offset_on_start=False, 
-                                         auto_offset_reset=OffsetType.LATEST) 
+                                         auto_offset_reset=OffsetType.LATEST)
  
     # This is blocking - it will wait for a new message 
     for msg in consumer: 

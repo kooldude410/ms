@@ -32,15 +32,16 @@ def get_addItem(index):
                                          consumer_timeout_ms=1000) 
  
     logger.info("Retrieving item at index %d" % index) 
-    list = [None]
+    
     try: 
         for msg in consumer:
+            print(msg['type'])
             msg_str = msg.value.decode('utf-8') 
-            msg = json.loads(msg_str) 
-            if msg['type'] == 'pickupitem':
-                list.append(msg)
-            payload = list[index]
-            print(payload)
+            msg = json.loads(msg_str)
+            print(msg) 
+            if msg['type'] == 'pickupitem' and index == count:
+                return msg['payload'], 200
+            count += 1
     except: 
         logger.error("No more messages found") 
      
@@ -55,18 +56,17 @@ def get_addXP(index):
     consumer = topic.get_simple_consumer(reset_offset_on_start=True,  
                                          consumer_timeout_ms=1000) 
  
-    logger.info("Retrieving item at index %d" % index) 
+    logger.info("Retrieving item at index %d" % index)
     list = []
+    count = 0
     try: 
-
         for msg in consumer: 
-            print(msg)
             msg_str = msg.value.decode('utf-8') 
             msg = json.loads(msg_str) 
-            if msg['type'] == 'pickupitem':
-                list.append(msg)
-            payload = list[index]
-            print(payload)
+            if msg['type'] == 'levelup' and index == count:
+                return msg['payload'], 200
+            count += 1
+               
     except: 
         logger.error("No more messages found") 
      

@@ -47,11 +47,10 @@ def addItem(body):
  
     msg = { "type": "pickupitem",  
             "datetime" :    
-            datetime.datetime.now().strftime( 
-            "%Y-%m-%dT%H:%M:%S"),  
+            datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),  
             "payload": body } 
-    msg_str = json.dumps(msg) 
-    producer.produce(msg_str.encode('utf-8'))    
+    msg_str = json.dumps(msg)
+    producer.produce(msg_str.encode('utf-8'))
 
     returnlog = f"Returned event addItem response (Id: {currentId}) with status 201"
     logging.info(returnlog)
@@ -71,7 +70,7 @@ def addXP(body):
 
     client = KafkaClient(hosts=f'{KAFURL}:{KAFPORT}') 
     topic = client.topics[str.encode(KAFTOPIC)] 
-    producer = topic.get_sync_producer() 
+    producer = topic.get_sync_producer()
     
 
     msg = { "type": "levelup",  

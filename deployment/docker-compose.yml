@@ -52,14 +52,14 @@ services:
     ports:
       - '8080:8080'
     depends_on:
-      - “kafka”
+      - kafka
       
   storage:
     image: storage
     ports:
       - '8090:8090'
     depends_on:
-      - “kafka”
+      - kafka
    
   processing:
     image: processing
@@ -67,14 +67,14 @@ services:
     ports:
       - '8100:8100'
     depends_on:
-      - “kafka”
+      - kafka
       
   audit:
     image: audit
     ports:
       - '8083:8083'
     depends_on:
-      - “kafka”
+      - kafka
 
 # Names our volume 
 volumes: 

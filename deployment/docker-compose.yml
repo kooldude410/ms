@@ -54,7 +54,7 @@ services:
     depends_on:
       - “kafka”
       
-   storage:
+  storage:
     image: storage
     ports:
       - “8090:8090”
@@ -69,7 +69,7 @@ services:
     depends_on:
       - “kafka”
       
-   audit:
+  audit:
     image: audit
     ports:
       - “8083:8083”

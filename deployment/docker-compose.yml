@@ -65,7 +65,7 @@ services:
     image: processing
     network_mode: host
     ports:
-      - [8100:8100}
+      - [8100:8100]
     depends_on:
       - “kafka”
       

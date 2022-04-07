@@ -50,7 +50,8 @@ def populate_stats():
     
     session = DB_SESSION()
     starttime = datetime.datetime.now()
-    sampletime = {'timestamp' : (starttime - datetime.timedelta(minutes=2)).strptime("%Y-%m-%d %H:%M:%S.%f")}
+    # deltatime = datetime.datetime.strptime
+    sampletime = {'timestamp' : (starttime - datetime.timedelta(minutes=2)).strftime("%Y-%m-%d %H:%M:%S.%f")}
     # deltatime = datetime.datetime.strptime(sampletime, "%Y-%m-%d %H:%M:%S.%f")
     logger.debug(f"sampletime is {sampletime}")
     itemcall = requests.get(url = DBURL1, params = sampletime)

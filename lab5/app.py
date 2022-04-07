@@ -29,6 +29,9 @@ logger = logging.getLogger('basicLogger')
 DBURL1 = "http://localhost:8090/characters/pickupitem"
 DBURL2 = "http://localhost:8090/characters/levelup"
 
+DB_ENGINE = create_engine("sqlite:///characters.sqlite")
+Base.metadata.bind = DB_ENGINE
+DB_SESSION = sessionmaker(bind=DB_ENGINE)
 
 scheduler = BackgroundScheduler()
 

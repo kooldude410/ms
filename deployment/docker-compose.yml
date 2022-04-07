@@ -82,6 +82,16 @@ services:
       - kafka
     networks:
     - "api.network"
+  
+  dashboard:
+    image: dashboard
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "processing"
+      - "audit"
+    networks:
+    - "api.network"
 
 # Names our volume 
 volumes: 

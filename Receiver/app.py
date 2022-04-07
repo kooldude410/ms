@@ -47,7 +47,7 @@ def addItem(body):
  
     msg = { "type": "pickupitem",  
             "datetime" :    
-            datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),  
+            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f"),  
             "payload": body } 
     msg_str = json.dumps(msg)
     producer.produce(msg_str.encode('utf-8'))
@@ -76,7 +76,7 @@ def addXP(body):
     msg = { "type": "levelup",  
             "datetime" :    
             datetime.datetime.now().strftime( 
-            "%Y-%m-%dT%H:%M:%S"),  
+            "%Y-%m-%d %H:%M:%S.%f"),  
             "payload": body } 
     msg_str = json.dumps(msg) 
     producer.produce(msg_str.encode('utf-8'))    

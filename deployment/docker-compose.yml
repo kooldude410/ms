@@ -53,6 +53,8 @@ services:
       - '8080:8080'
     depends_on:
       - kafka
+    networks:
+    - "api.network"
       
   storage:
     image: storage
@@ -60,14 +62,17 @@ services:
       - '8090:8090'
     depends_on:
       - kafka
+    networks:
+    - "api.network"
    
   processing:
     image: processing
-    network_mode: host
-    #ports:
-      #- '8100'
+    ports:
+      - '8100'
     depends_on:
       - kafka
+    networks:
+    - "api.network"
       
   audit:
     image: audit
@@ -75,7 +80,12 @@ services:
       - '8083:8083'
     depends_on:
       - kafka
+    networks:
+    - "api.network"
 
 # Names our volume 
 volumes: 
   my-db:
+
+networks:
+  api.network:

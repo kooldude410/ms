@@ -32,7 +32,7 @@ export default function AppStats() {
         return(
             <div>
                 <h1>Latest Stats</h1>
-                <table className={"StatsTable"}>
+                <table className={"stats"}>
 					<tbody>
 						<tr>
 							<th>Xp Gained</th>

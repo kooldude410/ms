@@ -50,17 +50,17 @@ def populate_stats():
     
     session = DB_SESSION()
     starttime = datetime.datetime.now()
-    sampletime = {'timestamp' : starttime - datetime.timedelta(minutes=2)}
-    deltatime = datetime.datetime.strptime(sampletime, "%Y-%m-%d %H:%M:%S.%f")
-    logger.debug(f"sampletime is {deltatime}")
-    itemcall = requests.get(url = DBURL1, params = deltatime)
+    sampletime = {'timestamp' : (starttime - datetime.timedelta(minutes=2)).strptime("%Y-%m-%d %H:%M:%S.%f")}
+    # deltatime = datetime.datetime.strptime(sampletime, "%Y-%m-%d %H:%M:%S.%f")
+    logger.debug(f"sampletime is {sampletime}")
+    itemcall = requests.get(url = DBURL1, params = sampletime)
     iteminfo = itemcall.json()
     if itemcall.status_code == 200:
         logger.info(f"Recieved {len(iteminfo)} item events.")
     else:
         logger.error(f"Recieved {itemcall.status_code} status code.")
 
-    xpcall = requests.get(url = DBURL2, params = deltatime)
+    xpcall = requests.get(url = DBURL2, params = sampletime)
     xpinfo = xpcall.json()
     if xpcall.status_code == 200:
         logger.info(f"Recieved {len(xpinfo)} item events.")

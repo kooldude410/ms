@@ -26,8 +26,8 @@ with open('log_conf.yml', 'r') as f:
     
 logger = logging.getLogger('basicLogger')     
 
-DBURL1 = "http://localhost:8090/characters/pickupitem"
-DBURL2 = "http://localhost:8090/characters/levelup"
+DBURL1 = "http://kafka.westus.cloudapp.azure.com:8090/characters/pickupitem"
+DBURL2 = "http://kafka.westus.cloudapp.azure.com:8090/characters/levelup"
 
 DB_ENGINE = create_engine("sqlite:///characters.sqlite")
 Base.metadata.bind = DB_ENGINE

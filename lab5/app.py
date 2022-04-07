@@ -40,7 +40,6 @@ def get_stats():
     '''get request for most recent event'''
     session = DB_SESSION()
     recentstats = (session.query(stats).order_by(stats.id.desc()).first()).to_dict()
-    recentstats.head
     logger.debug(f'Recent stats called: total item gain {recentstats["item_total"]}, max item gain {recentstats["item_max_gain"]}, total xp gained {recentstats["xp_total"]}, max xp gained {recentstats["xp_max_gain"]}')
     session.close()
     logger.info('/event/stats get processing complete.')

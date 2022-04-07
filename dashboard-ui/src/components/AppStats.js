@@ -39,17 +39,14 @@ export default function AppStats() {
 							<th>Item Pickup</th>
 						</tr>
 						<tr>
-							<td># XP: {stats['num_bp_readings']}</td>
-							<td># ITEM: {stats['num_hr_readings']}</td>
+							<td># XP: {stats['item_total']}</td>
+							<td># ITEM: {stats['xp_total']}</td>
 						</tr>
 						<tr>
-							<td colspan="2">Max BP Systolic: {stats['max_bp_sys_reading']}</td>
+							<td colspan="2">Max Item Gained: {stats['item_max_gain']}</td>
 						</tr>
 						<tr>
-							<td colspan="2">Max BR Diastolic: {stats['max_bp_dia_reading']}</td>
-						</tr>
-						<tr>
-							<td colspan="2">Max HR: {stats['max_bp_sys_reading']}</td>
+							<td colspan="2">Max XP Gained: {stats['xp_max_gain']}</td>
 						</tr>
 					</tbody>
                 </table>

@@ -51,7 +51,7 @@ def populate_stats():
     session = DB_SESSION()
     starttime = datetime.datetime.now()
     sampletime = {'timestamp' : starttime - datetime.timedelta(minutes=2)}
-    
+    logger.debug(f"sampletime is {sampletime}")
     itemcall = requests.get(url = DBURL1, params = sampletime)
     iteminfo = itemcall.json()
     if itemcall.status_code == 200:

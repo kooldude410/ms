@@ -68,7 +68,7 @@ services:
   processing:
     image: processing
     ports:
-      - '8100'
+      - '8100:8100'
     depends_on:
       - kafka
     networks:

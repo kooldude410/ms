@@ -2,9 +2,9 @@ from xml.dom.minidom import CharacterData
 import logging.config
 import connexion
 from connexion import NoContent
-
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from apscheduler.schedulers.background import BackgroundScheduler
-
 import swagger_ui_bundle
 import requests
 

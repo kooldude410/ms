@@ -65,7 +65,7 @@ def populate_stats():
     # itemurl = app_config["eventstore"]["url"] + "/characters/levelup?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp
     # logger.debug(f"itemurl is {itemurl}")
     
-    itemcall = requests.get(url = DBURL1, params = {"start_timestamp": start_timestamp, "end_timestamp": current_timestamp})
+    itemcall = requests.get(url = DBURL1, params = {"timestamp": start_timestamp, "end_timestamp": current_timestamp})
     logger.debug(f'itemcall is type {type(itemcall)}')
     
     iteminfo = itemcall.json()
@@ -80,7 +80,7 @@ def populate_stats():
     # xpurl = app_config["eventstore"]["url"] + "/characters/levelup?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp
     # logger.debug(f"xpurl is {xpurl}")
     
-    xpcall = requests.get(url = DBURL2, params = {"start_timestamp": start_timestamp, "end_timestamp": current_timestamp})
+    xpcall = requests.get(url = DBURL2, params = {"timestamp": start_timestamp, "end_timestamp": current_timestamp})
     logger.debug(f'xpcall is type {type(xpcall)}')
     
     xpinfo = xpcall.json()

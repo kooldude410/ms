@@ -62,10 +62,10 @@ def populate_stats():
     #start from timestamp of latest entry
     start_timestamp = laststats['last_updated']
     
-    itemurl = app_config["eventstore"]["url"] + "/characters/levelup?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp
-    logger.debug(f"itemurl is {itemurl}")
+    # itemurl = app_config["eventstore"]["url"] + "/characters/levelup?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp
+    # logger.debug(f"itemurl is {itemurl}")
     
-    itemcall = requests.get(itemurl)
+    itemcall = requests.get(url = DBURL1, params = {"start_timestamp": start_timestamp, "end_timestamp": current_timestamp})
     logger.debug(f'itemcall is type {type(itemcall)}')
     
     iteminfo = itemcall.json()
@@ -77,10 +77,10 @@ def populate_stats():
         logger.error(f"Recieved {itemcall.status_code} status code.")
 
 
-    xpurl = app_config["eventstore"]["url"] + "/characters/levelup?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp
-    logger.debug(f"xpurl is {xpurl}")
+    # xpurl = app_config["eventstore"]["url"] + "/characters/levelup?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp
+    # logger.debug(f"xpurl is {xpurl}")
     
-    xpcall = requests.get(xpurl)
+    xpcall = requests.get(url = DBURL2, params = {"start_timestamp": start_timestamp, "end_timestamp": current_timestamp})
     logger.debug(f'xpcall is type {type(xpcall)}')
     
     xpinfo = xpcall.json()

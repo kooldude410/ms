@@ -164,7 +164,7 @@ def process_messages():
             break
         except:
             logger.error(f"Failed to connect to Kafka, this is number {retry} try")
-            time.sleep(app_config["events"]["sleep"])
+            time.sleep(APPCONF["events"]["sleep"])
             retry += 1
             logger.info("retry in 10 second") 
     # Create a consume on a consumer group, that only reads new messages  

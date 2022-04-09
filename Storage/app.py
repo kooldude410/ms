@@ -151,6 +151,7 @@ def process_messages():
     hostname = "%s:%d" % (APPCONF["events"]["hostname"],   
                           APPCONF["events"]["port"])
     max_retry = APPCONF["events"]["retry"]
+    retry = 0
     
     while retry < max_retry:
         logger.info(f"Try to connect Kafka Server: try #{retry}")

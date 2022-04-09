@@ -107,7 +107,7 @@ paths:
           schema:
             type: string
             format: date-time
-            example: 2022-03-03 11:38:40.097 
+            example: 2022-03-03 11:38:40.097
       responses: 
         '200': 
           description: Successfully returned a list of xo events
@@ -149,7 +149,7 @@ components:
         timestamp:
           type: string
           format: date-time
-          example: 2021-08-29T09:12:33.001Z
+          example: 2022-03-03 11:38:40.097
         traceid:
           type: string
           format: uuid
@@ -175,7 +175,7 @@ components:
         timestamp:
           type: string
           format: date-time
-          example: 2016-08-29T09:12:33.001Z
+          example: 2022-03-03 11:38:40.097
         traceid:
           type: string
           format: uuid

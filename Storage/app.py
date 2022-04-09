@@ -94,7 +94,9 @@ def getlastitem(timestamp, end_timestamp):
     timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f") 
     end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%d %H:%M:%S.%f")
     
-    readings = session.query(pickupitem).filter(and_(pickupitem.timestamp >= timestamp_datetime >= timestamp_datetime,pickupitem.timestamp < end_timestamp_datetime)) 
+    readings = session.query(pickupitem).filter(
+        and_(pickupitem.timestamp >= timestamp_datetime,
+             pickupitem.timestamp < end_timestamp_datetime)) 
  
     results_list = [] 
  
@@ -119,7 +121,9 @@ def getlastxp(timestamp, end_timestamp):
     timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f")
     end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%d %H:%M:%S.%f") 
  
-    readings = session.query(levelup).filter(and_(levelup.timestamp >= timestamp_datetime >= timestamp_datetime,levelup.timestamp < end_timestamp_datetime)) 
+    readings = session.query(levelup).filter(
+        and_(levelup.timestamp >= timestamp_datetime,
+             levelup.timestamp < end_timestamp_datetime)) 
  
     results_list = [] 
  

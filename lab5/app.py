@@ -62,18 +62,30 @@ def populate_stats():
     #start from timestamp of latest entry
     start_timestamp = laststats['last_updated']
     
+    itemurl = app_config["eventstore"]["url"] + "/characters/levelup?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp
+    logger.debug(f"itemurl is {itemurl}")
     
-    itemcall = requests.get(app_config["eventstore"]["url"] + "/blood-pressure?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp)
+    itemcall = requests.get(itemurl)
     logger.debug(f'itemcall is type {type(itemcall)}')
+    
     iteminfo = itemcall.json()
     logger.debug(f'iteminfo is {iteminfo}')
+    
     if itemcall.status_code == 200:
         logger.info(f"Recieved {len(iteminfo)} item events.")
     else:
         logger.error(f"Recieved {itemcall.status_code} status code.")
 
-    xpcall = requests.get(app_config["eventstore"]["url"] + "/blood-pressure?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp)
+
+    xpurl = app_config["eventstore"]["url"] + "/characters/levelup?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp
+    logger.debug(f"xpurl is {xpurl}")
+    
+    xpcall = requests.get(xpurl)
+    logger.debug(f'xpcall is type {type(xpcall)}')
+    
     xpinfo = xpcall.json()
+    logger.debug(f'iteminfo is {xpinfo}')
+    
     if xpcall.status_code == 200:
         logger.info(f"Recieved {len(xpinfo)} item events.")
     else:

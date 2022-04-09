@@ -5,6 +5,7 @@ from connexion import NoContent
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import and_
 
 from base import Base
 from levelup import levelup
@@ -85,13 +86,14 @@ def addItem(body):
 
     #return NoContent, 201
 
-def getlastitem(timestamp): 
+def getlastitem(timestamp, end_timestamp): 
     """ Gets new blood pressure readings after the timestamp """ 
  
     session = DB_SESSION()
     dblog() 
     timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f") 
-
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%d %H:%M:%S.%f")
+    
     readings = session.query(pickupitem).filter(pickupitem.timestamp >= timestamp_datetime) 
  
     results_list = [] 
@@ -108,13 +110,14 @@ def getlastitem(timestamp):
  
     return results_list, 200 
 
-def getlastxp(timestamp): 
+def getlastxp(timestamp, end_timestamp): 
     """ Gets new blood pressure readings after the timestamp """ 
  
     session = DB_SESSION()
     dblog() 
  
-    timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f") 
+    timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f")
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%d %H:%M:%S.%f") 
  
     readings = session.query(levelup).filter(levelup.timestamp >= timestamp_datetime) 
  

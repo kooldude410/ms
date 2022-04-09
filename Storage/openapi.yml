@@ -43,7 +43,14 @@ paths:
           schema: 
             type: string 
             format: date-time 
-            example: 2016-08-29T09:12:33.001Z 
+            example: 2022-03-03 11:38:40.097
+        - name: end_timestamp
+          in: query
+          description: Limits the end time of the query
+          schema:
+            type: string
+            format: date-time
+            example: 2022-03-03 11:38:40.097 
       responses: 
         '200': 
           description: Successfully returned a list of xo events
@@ -93,7 +100,14 @@ paths:
           schema: 
             type: string 
             format: date-time 
-            example: 2016-08-29T09:12:33.001Z 
+            example: 2022-03-03 11:38:40.097
+        - name: end_timestamp
+          in: query
+          description: Limits the end time of the query
+          schema:
+            type: string
+            format: date-time
+            example: 2022-03-03 11:38:40.097 
       responses: 
         '200': 
           description: Successfully returned a list of xo events

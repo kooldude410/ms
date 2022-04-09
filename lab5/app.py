@@ -64,9 +64,9 @@ def populate_stats():
     
     
     itemcall = requests.get(app_config["eventstore"]["url"] + "/blood-pressure?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp)
-    logger.debug('itemcall is type ' + type(itemcall))
+    logger.debug(f'itemcall is type {type(itemcall)}')
     iteminfo = itemcall.json()
-    logger.debug('iteminfo is' + iteminfo)
+    logger.debug(f'iteminfo is {iteminfo}')
     if itemcall.status_code == 200:
         logger.info(f"Recieved {len(iteminfo)} item events.")
     else:

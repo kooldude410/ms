@@ -11,7 +11,7 @@ class stats(Base):
     item_max_gain = Column(Integer, nullable=False) 
     xp_total = Column(Integer, nullable=False) 
     xp_max_gain = Column(Integer, nullable=False)
-    last_updated = Column(String(100), nullable=False)
+    last_updated = Column(DateTime, nullable=False)
 
  
     def __init__(self, item_total,item_max_gain,xp_total,xp_max_gain,last_updated): 

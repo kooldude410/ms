@@ -115,7 +115,7 @@ def populate_stats():
                        item_max_gain,
                        xp_total,
                        xp_max_gain,
-                       datetime.datetime(current_timestamp))
+                       datetime.datetime.now())
 
     if (item_max_gain != 0) and (xp_max_gain != 0):
         session.add(parsedstats)

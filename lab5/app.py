@@ -86,13 +86,13 @@ def populate_stats():
     
     
     for items in iteminfo:
-        logger.debug(f"Processed item event {items['traceid']}")
+        logger.debug('Processed item event' + {items["traceid"]})
         item_total += items['itemQuantity']
         if item_max_gain < items['itemQuantity']:
             item_max_gain = items['itemQuantity']
             
     for items in xpinfo:
-        logger.debug(f"Processed xp event {items['traceid']}")
+        logger.debug("Processed xp event" + {items['traceid']})
         xp_total += items['xpAmount']
         if xp_max_gain < items['xpAmount']:
             xp_max_gain = items['xpAmount']

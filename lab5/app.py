@@ -49,29 +49,41 @@ def populate_stats():
     """gets some events from storage service, then stores them"""
     
     session = DB_SESSION()
-    starttime = datetime.datetime.now()
+    #query the most recent entry
+    laststats = session.query(stats).order_by(stats.last_updated.desc()).first().to_dict()
+    
+    #sets current time
+    current_timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
     # deltatime = datetime.datetime.strptime
-    sampletime = {'timestamp' : (starttime - datetime.timedelta(minutes=2)).strftime("%Y-%m-%d %H:%M:%S.%f")}
+    # sampletime = {'timestamp' : (last_updated - datetime.timedelta(minutes=2)).strftime("%Y-%m-%d %H:%M:%S.%f")}
     # deltatime = datetime.datetime.strptime(sampletime, "%Y-%m-%d %H:%M:%S.%f")
-    logger.debug(f"sampletime is {sampletime}")
-    itemcall = requests.get(url = DBURL1, params = sampletime)
+    # logger.debug(f"sampletime is {sampletime}")
+    
+    #start from timestamp of latest entry
+    start_timestamp = laststats['last_updated']
+    
+    
+    itemcall = requests.get(app_config["eventstore"]["url"] + "/blood-pressure?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp)
     iteminfo = itemcall.json()
     if itemcall.status_code == 200:
         logger.info(f"Recieved {len(iteminfo)} item events.")
     else:
         logger.error(f"Recieved {itemcall.status_code} status code.")
 
-    xpcall = requests.get(url = DBURL2, params = sampletime)
+    xpcall = requests.get(app_config["eventstore"]["url"] + "/blood-pressure?start_timestamp=" + start_timestamp + "&end_timestamp=" + current_timestamp)
     xpinfo = xpcall.json()
     if xpcall.status_code == 200:
         logger.info(f"Recieved {len(xpinfo)} item events.")
     else:
         logger.error(f"Recieved {xpcall.status_code} status code.")
     
+    
+    
     item_total = 0
     item_max_gain = 0
     xp_total = 0
     xp_max_gain = 0
+    
     
     for items in iteminfo:
         logger.debug(f"Processed item event {items['traceid']}")
@@ -89,7 +101,7 @@ def populate_stats():
                        item_max_gain,
                        xp_total,
                        xp_max_gain,
-                       starttime)
+                       current_timestamp)
 
     if (item_max_gain != 0) and (xp_max_gain != 0):
         session.add(parsedstats)

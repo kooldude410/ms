@@ -12,12 +12,14 @@ from levelup import levelup
 from pickupitem import pickupitem
 
 import yaml
-
 import datetime
-import json 
+import time
+import json
+ 
 from pykafka import KafkaClient
 from pykafka.common import OffsetType
 from threading import Thread
+
 
 with open(r'app_conf.yml') as file:
     APPCONF = yaml.load(file, Loader=yaml.FullLoader)
@@ -147,16 +149,27 @@ def dblog():
 def process_messages(): 
     """ Process event messages """ 
     hostname = "%s:%d" % (APPCONF["events"]["hostname"],   
-                          APPCONF["events"]["port"]) 
-    client = KafkaClient(hosts=hostname) 
-    topic = client.topics[str.encode(APPCONF["events"]["topic"])] 
-     
+                          APPCONF["events"]["port"])
+    max_retry = APPCONF["events"]["retry"]
+    
+    while retry < max_retry:
+        logger.info(f"Try to connect Kafka Server, this is number {retry} try")
+        try: 
+            client = KafkaClient(hosts=hostname) 
+            topic = client.topics[str.encode(APPCONF["events"]["topic"])]
+            logger.info("Successfully connect to Kafka") 
+            consumer = topic.get_simple_consumer(consumer_group=b'event_group', 
+                                                reset_offset_on_start=False, 
+                                                auto_offset_reset=OffsetType.LATEST)
+        except:
+            logger.error(f"Failed to connect to Kafka, this is number {retry} try")
+            time.sleep(app_config["events"]["sleep"])
+            retry += 1
+            logger.info("retry in 10 second") 
     # Create a consume on a consumer group, that only reads new messages  
     # (uncommitted messages) when the service re-starts (i.e., it doesn't  
     # read all the old messages from the history in the message queue). 
-    consumer = topic.get_simple_consumer(consumer_group=b'event_group', 
-                                         reset_offset_on_start=False, 
-                                         auto_offset_reset=OffsetType.LATEST)
+
  
     # This is blocking - it will wait for a new message 
     for msg in consumer: 
